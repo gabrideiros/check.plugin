@@ -1,0 +1,7 @@
+name: WindCheque
+main: me.gabrideiros.cheque.Main
+version: 1.0.0
+depend: [Vault, WindCash]
+author: Gabrideiros
+commands:
+  cheque:
