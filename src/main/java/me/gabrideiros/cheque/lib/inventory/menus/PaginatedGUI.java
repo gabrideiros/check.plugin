@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-package me.gabrideiros.cheque.lib.menus;
+package me.gabrideiros.cheque.lib.inventory.menus;
 
 import org.bukkit.entity.Player;
 

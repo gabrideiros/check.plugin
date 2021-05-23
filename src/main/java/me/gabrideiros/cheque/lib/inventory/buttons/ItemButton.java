@@ -1,4 +1,4 @@
-package me.gabrideiros.cheque.lib.buttons;
+package me.gabrideiros.cheque.lib.inventory.buttons;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
@@ -196,7 +196,7 @@ public class ItemButton {
         ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
         if(url == null || url.isEmpty()) return new ItemStack(Material.SKULL_ITEM, 3);
         SkullMeta skullMeta = (SkullMeta)skull.getItemMeta();
-        GameProfile profile = new GameProfile(UUID.randomUUID(), (String)null);
+        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
         byte[] encodedData = Base64.getEncoder().encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", url).getBytes());
         profile.getProperties().put("textures", new Property("textures", new String(encodedData)));
         Field profileField = null;
@@ -205,13 +205,14 @@ public class ItemButton {
         } catch (NoSuchFieldException | SecurityException e) {
             e.printStackTrace();
         }
+        assert profileField != null;
         profileField.setAccessible(true);
         try {
             profileField.set(skullMeta, profile);
         } catch (IllegalArgumentException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        skull.setItemMeta((ItemMeta)skullMeta);
+        skull.setItemMeta(skullMeta);
         return skull;
     }
 
@@ -251,8 +252,8 @@ public class ItemButton {
 
             dataOutput.writeInt(items.length);
 
-            for (int i = 0; i < items.length; i++) {
-                dataOutput.writeObject(items[i]);
+            for (ItemStack itemStack : items) {
+                dataOutput.writeObject(itemStack);
             }
             dataOutput.close();
             return Base64Coder.encodeLines(outputStream.toByteArray());

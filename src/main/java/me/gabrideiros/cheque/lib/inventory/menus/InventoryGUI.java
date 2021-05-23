@@ -23,13 +23,13 @@
  * SOFTWARE.
  */
 
-package me.gabrideiros.cheque.lib.menus;
+package me.gabrideiros.cheque.lib.inventory.menus;
 
 
 
-import me.gabrideiros.cheque.lib.buttons.ClickAction;
-import me.gabrideiros.cheque.lib.buttons.ItemButton;
-import me.gabrideiros.cheque.lib.utils.InventorySize;
+import me.gabrideiros.cheque.lib.inventory.buttons.ClickAction;
+import me.gabrideiros.cheque.lib.inventory.buttons.ItemButton;
+import me.gabrideiros.cheque.lib.inventory.utils.InventorySize;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;

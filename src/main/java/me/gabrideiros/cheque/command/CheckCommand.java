@@ -1,6 +1,7 @@
 package me.gabrideiros.cheque.command;
 
 import me.gabrideiros.cheque.manager.CheckManager;
+import me.gabrideiros.cheque.menu.CheckMenu;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -8,10 +9,10 @@ import org.bukkit.entity.Player;
 
 public class CheckCommand implements CommandExecutor {
 
-    private CheckManager manager;
+    private final CheckMenu checkMenu;
 
-    public CheckCommand(CheckManager manager) {
-        this.manager = manager;
+    public CheckCommand(CheckMenu checkMenu) {
+        this.checkMenu = checkMenu;
     }
 
     @Override
@@ -21,7 +22,7 @@ public class CheckCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        manager.open(player);
+        checkMenu.open(player);
 
         return false;
     }

@@ -1,38 +1,43 @@
 package me.gabrideiros.cheque;
 
 import me.gabrideiros.cheque.command.CheckCommand;
-import me.gabrideiros.cheque.lib.listeners.InventoryListener;
+import me.gabrideiros.cheque.lib.inventory.listeners.InventoryListener;
+import me.gabrideiros.cheque.listener.CheckListener;
 import me.gabrideiros.cheque.manager.CheckManager;
+import me.gabrideiros.cheque.menu.CheckMenu;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
 
     private Economy economy;
-    private CheckManager manager;
 
     @Override
     public void onEnable() {
 
-       setupEconomy();
+        setupEconomy();
 
-       new InventoryListener(this);
+        new InventoryListener(this);
 
-       manager = new CheckManager(this);
+        CheckManager manager = new CheckManager(this);
 
-       getCommand("cheque").setExecutor(new CheckCommand(manager));
+        CheckMenu checkMenu = new CheckMenu(manager);
+
+        Bukkit.getPluginManager().registerEvents(new CheckListener(this, manager), this);
+
+        getCommand("cheque").setExecutor(new CheckCommand(checkMenu));
     }
 
     @Override
     public void onDisable() {}
 
-    private boolean setupEconomy() {
-        final RegisteredServiceProvider<Economy> economyProvider = (RegisteredServiceProvider<Economy>)this.getServer().getServicesManager().getRegistration((Class)Economy.class);
+    private void setupEconomy() {
+        final RegisteredServiceProvider<Economy> economyProvider = (RegisteredServiceProvider<Economy>)this.getServer().getServicesManager().getRegistration((Class<Economy>)Economy.class);
         if (economyProvider != null) {
             this.economy = (Economy)economyProvider.getProvider();
         }
-        return this.economy != null;
     }
 
     public Economy getEconomy() {

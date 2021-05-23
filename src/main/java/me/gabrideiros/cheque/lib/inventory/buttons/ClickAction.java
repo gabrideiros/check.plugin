@@ -1,4 +1,4 @@
-package me.gabrideiros.cheque.lib.buttons;
+package me.gabrideiros.cheque.lib.inventory.buttons;
 
 import org.bukkit.event.inventory.InventoryClickEvent;
 

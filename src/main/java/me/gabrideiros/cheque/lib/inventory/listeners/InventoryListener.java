@@ -23,33 +23,35 @@
  * SOFTWARE.
  */
 
-package me.gabrideiros.cheque.lib.utils;
+package me.gabrideiros.cheque.lib.inventory.listeners;
 
-public enum InventorySize {
-    ONE_ROW(9),
-    TWO_ROWS(18),
-    THREE_ROWS(27),
-    FOUR_ROWS(36),
-    FIVE_ROWS(45),
-    SIX_ROWS(54);
+import me.gabrideiros.cheque.lib.inventory.menus.InventoryGUI;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
-    private int slotsAmount;
+public class InventoryListener implements Listener {
 
-    InventorySize(int slotsAmount) {
-        this.slotsAmount = slotsAmount;
+    public InventoryListener(JavaPlugin plugin) {
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
-    public int getSlotsAmount() {
-        return slotsAmount;
-    }
-
-    public static boolean contains(int slotsAmount) {
-
-        for (InventorySize c : InventorySize.values()) {
-            if (c.slotsAmount == slotsAmount) {
-                return true;
-            }
+    @EventHandler
+    public void onClick(InventoryClickEvent event) {
+        if (!(event.getWhoClicked() instanceof Player) || event.getCurrentItem() == null) {
+            return;
         }
-        return false;
+
+        if (event.getInventory().getHolder() != null &&
+                event.getInventory().getHolder() instanceof InventoryGUI) {
+
+            final InventoryGUI inventoryGUI = (InventoryGUI) event.getInventory().getHolder();
+
+            event.setCancelled(inventoryGUI.isDefaultAllCancell());
+
+            inventoryGUI.onClick(event);
+        }
     }
 }

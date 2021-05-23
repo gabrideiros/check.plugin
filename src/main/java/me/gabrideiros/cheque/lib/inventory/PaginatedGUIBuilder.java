@@ -23,14 +23,14 @@
  * SOFTWARE.
  */
 
-package me.gabrideiros.cheque.lib;
+package me.gabrideiros.cheque.lib.inventory;
 
 import com.google.common.collect.Maps;
 
-import me.gabrideiros.cheque.lib.buttons.ClickAction;
-import me.gabrideiros.cheque.lib.buttons.ItemButton;
-import me.gabrideiros.cheque.lib.menus.InventoryGUI;
-import me.gabrideiros.cheque.lib.menus.PaginatedGUI;
+import me.gabrideiros.cheque.lib.inventory.buttons.ClickAction;
+import me.gabrideiros.cheque.lib.inventory.buttons.ItemButton;
+import me.gabrideiros.cheque.lib.inventory.menus.InventoryGUI;
+import me.gabrideiros.cheque.lib.inventory.menus.PaginatedGUI;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
