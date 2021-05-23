@@ -39,7 +39,7 @@ public class CheckManager {
     }
 
     public double getCheckCashAmount(ItemStack item) {
-        return new NBTItem(item).getDouble("check_cash");
+        return new NBTItem(item).getDouble("check_cash") * item.getAmount();
     }
 
     public double getAllChecksMoney(Inventory inventory) {
